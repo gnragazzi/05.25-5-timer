@@ -22,7 +22,7 @@ function App() {
     }
   }
   useEffect(() => {
-    if (clock === 0) {
+    if (clock < 0) {
       setIsSessionCycle(!isSessionCycle)
       setClock(isSessionCycle ? breakLength * 60 : sessionLength * 60)
       setIsCountdownFinished(true)
