@@ -1,8 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
 import reducer from './reducer'
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
-import { FaPlay, FaPause } from 'react-icons/fa'
-import { VscDebugRestart } from 'react-icons/vsc'
 
 function App() {
   const [breakLength, setBreakLength] = useState(5)
@@ -22,7 +19,7 @@ function App() {
     }
   }
   useEffect(() => {
-    if (clock < 0) {
+    if (clock === 0) {
       setIsSessionCycle(!isSessionCycle)
       setClock(isSessionCycle ? breakLength * 60 : sessionLength * 60)
       setIsCountdownFinished(true)
@@ -48,7 +45,7 @@ function App() {
               Session Lenght
             </h4>
             <div className='btn-container'>
-              <IoIosArrowDown
+              <button
                 className='icon'
                 id='session-decrement'
                 onClick={() => {
@@ -59,11 +56,13 @@ function App() {
                       setClock((sessionLength - 1) * 60)
                   }
                 }}
-              />
+              >
+                decrement
+              </button>
               <p className='Session-time time' id='session-length'>
                 {sessionLength}
               </p>
-              <IoIosArrowUp
+              <button
                 className='icon'
                 id='session-increment'
                 onClick={() => {
@@ -74,7 +73,9 @@ function App() {
                       setClock((sessionLength + 1) * 60)
                   }
                 }}
-              />
+              >
+                increment{' '}
+              </button>
             </div>
           </article>
           <article className='break-container'>
@@ -82,7 +83,7 @@ function App() {
               Break Length
             </h4>
             <div className='btn-container'>
-              <IoIosArrowDown
+              <button
                 className='icon'
                 id='break-decrement'
                 onClick={() => {
@@ -93,12 +94,14 @@ function App() {
                       setClock((breakLength - 1) * 60)
                   }
                 }}
-              />
+              >
+                decrement
+              </button>
 
               <p className='break-time time' id='break-length'>
                 {breakLength}
               </p>
-              <IoIosArrowUp
+              <button
                 className='icon'
                 id='break-increment'
                 onClick={() => {
@@ -109,7 +112,10 @@ function App() {
                       setClock((breakLength + 1) * 60)
                   }
                 }}
-              />
+              >
+                {' '}
+                increment{' '}
+              </button>
             </div>
           </article>
         </div>
@@ -134,12 +140,12 @@ function App() {
             }}
           >
             {isClockRunning ? (
-              <FaPause className='icon' />
+              <button className='icon'>pause</button>
             ) : (
-              <FaPlay className='icon' />
+              <button className='icon'>play</button>
             )}
           </button>
-          <VscDebugRestart
+          <button
             className='icon'
             id='reset'
             onClick={() => {
@@ -152,7 +158,9 @@ function App() {
               setIsSessionCycle(true)
               setIsCountdownFinished(false)
             }}
-          />
+          >
+            reset
+          </button>
         </div>
       </div>
     </section>
